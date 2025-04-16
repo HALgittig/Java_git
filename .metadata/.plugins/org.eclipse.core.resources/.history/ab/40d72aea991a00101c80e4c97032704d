@@ -39,6 +39,6 @@ public class DiscordWebhookSender {
         }
 
         int responseCode = connection.getResponseCode();
-        System.out.println("Discord Webhook 送信完了。レスポンスコード: " + responseCode);
+        System.out.println("📨 Discord Webhook 送信完了。レスポンスコード: " + responseCode);
     }
 }
