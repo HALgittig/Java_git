@@ -15,7 +15,7 @@ public class Main {
         File outputFile = new File("summary.txt");
 
         // あなたのDiscord Webhook URLをここに
-        String webhookUrl = "https://discord.com/api/webhooks/xxxxxxxxxx";
+        String webhookUrl = "https://discord.com/api/webhooks/1361910822225449070/gqw9y635H_jCcX4RhVyjj8iwMlRnIirqrr8TnHiR5K_Q2rIeJYePzjNv3QuF9EUPYUhl";
 
         if (!logFile.exists()) {
             System.err.println("❌ ログファイルが見つかりません: " + logFile.getAbsolutePath());
