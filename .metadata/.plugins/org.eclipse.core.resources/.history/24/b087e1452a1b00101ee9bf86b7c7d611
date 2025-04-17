@@ -35,7 +35,7 @@ public class JenkinsLogAnalyzer {
 
     public void writeSummary(File outputFile) throws IOException {
         try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile))) {
-            pw.println(" Jenkins Unity Build Log Summary\n");
+            pw.println("📦 Jenkins Unity Build Log Summary\n");
 
             pw.println(buildSucceeded ? "✅ ビルド結果: 成功\n" : "❌ ビルド結果: 失敗\n");
 

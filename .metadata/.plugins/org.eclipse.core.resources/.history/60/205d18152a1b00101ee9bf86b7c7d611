@@ -17,16 +17,16 @@ public class Main {
             return;
         }
 
-        String webhookUrl = "https://discord.com/api/webhooks/1361910822225449070/gqw9y635H_jCcX4RhVyjj8iwMlRnIirqrr8TnHiR5K_Q2rIeJYePzjNv3QuF9EUPYUhl"; // あなたのWebhook URLに置き換えてください
+        String webhookUrl = "https://discord.com/api/webhooks/xxxxxxxxxx"; // あなたのWebhook URLに置き換えてください
 
         File[] logFiles = logDir.listFiles((dir, name) -> name.endsWith(".txt") || name.endsWith(".log"));
         if (logFiles == null || logFiles.length == 0) {
-            System.out.println(" 処理対象のログファイルが見つかりません。");
+            System.out.println("📭 処理対象のログファイルが見つかりません。");
             return;
         }
 
         for (File logFile : logFiles) {
-            System.out.println(" 解析中: " + logFile.getName());
+            System.out.println("🔍 解析中: " + logFile.getName());
             File outputFile = new File(logDir, "summary_" + logFile.getName());
 
             JenkinsLogAnalyzer analyzer = new JenkinsLogAnalyzer();
@@ -41,7 +41,7 @@ public class Main {
             }
         }
 
-        System.out.println(" 全てのログファイルの処理が完了しました");
+        System.out.println("🎉 全てのログファイルの処理が完了しました！");
     }
 }
 
