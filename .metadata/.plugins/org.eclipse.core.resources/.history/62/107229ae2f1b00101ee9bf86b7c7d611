@@ -8,13 +8,11 @@ public class Main {
         if (args.length < 1) {
             System.out.println(" ログフォルダのパスを引数で指定してください。");
             System.out.println("例: java -cp src Main C:\\logs");
-            return;
         }
 
         File logDir = new File(args[0]);
         if (!logDir.exists() || !logDir.isDirectory()) {
             System.err.println(" 指定されたパスは存在しないか、ディレクトリではありません: " + logDir.getAbsolutePath());
-            return;
         }
 
         String webhookUrl = "https://discord.com/api/webhooks/1361910822225449070/gqw9y635H_jCcX4RhVyjj8iwMlRnIirqrr8TnHiR5K_Q2rIeJYePzjNv3QuF9EUPYUhl"; // あなたのWebhook URLに置き換えてください
@@ -22,7 +20,6 @@ public class Main {
         File[] logFiles = logDir.listFiles((dir, name) -> name.endsWith(".txt") || name.endsWith(".log"));
         if (logFiles == null || logFiles.length == 0) {
             System.out.println(" 処理対象のログファイルが見つかりません。");
-            return;
         }
 
         for (File logFile : logFiles) {

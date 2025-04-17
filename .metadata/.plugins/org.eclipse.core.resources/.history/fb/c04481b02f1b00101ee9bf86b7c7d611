@@ -36,7 +36,7 @@ public class Main {
                 DiscordWebhookSender.sendFileToDiscord(webhookUrl, outputFile);
                 System.out.println(" " + logFile.getName() + " → 送信完了");
             } catch (IOException e) {
-                System.err.println(" エラー発生: " + logFile.getName());
+                System.err.println("❌ エラー発生: " + logFile.getName());
                 e.printStackTrace();
             }
         }

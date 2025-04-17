@@ -37,12 +37,12 @@ public class JenkinsLogAnalyzer {
         try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile))) {
             pw.println(" Jenkins Unity Build Log Summary\n");
 
-            pw.println(buildSucceeded ? " ビルド結果: 成功\n" : " ビルド結果: 失敗\n");
+            pw.println(buildSucceeded ? "✅ ビルド結果: 成功\n" : "❌ ビルド結果: 失敗\n");
 
             if (errorLines.isEmpty()) {
-                pw.println(" エラーなし");
+                pw.println("❗ エラーなし");
             } else {
-                pw.println(" エラー情報（" + errorLines.size() + "件）");
+                pw.println("❌ エラー情報（" + errorLines.size() + "件）");
                 for (String err : errorLines) {
                     pw.println("- " + err);
                 }

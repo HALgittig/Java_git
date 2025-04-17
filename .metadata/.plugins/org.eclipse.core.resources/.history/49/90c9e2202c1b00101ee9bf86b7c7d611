@@ -6,14 +6,14 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println(" ログフォルダのパスを引数で指定してください。");
+            System.out.println("❗ ログフォルダのパスを引数で指定してください。");
             System.out.println("例: java -cp src Main C:\\logs");
             return;
         }
 
         File logDir = new File(args[0]);
         if (!logDir.exists() || !logDir.isDirectory()) {
-            System.err.println(" 指定されたパスは存在しないか、ディレクトリではありません: " + logDir.getAbsolutePath());
+            System.err.println("❌ 指定されたパスは存在しないか、ディレクトリではありません: " + logDir.getAbsolutePath());
             return;
         }
 
@@ -21,7 +21,6 @@ public class Main {
 
         File[] logFiles = logDir.listFiles((dir, name) -> name.endsWith(".txt") || name.endsWith(".log"));
         if (logFiles == null || logFiles.length == 0) {
-            System.out.println(" 処理対象のログファイルが見つかりません。");
             return;
         }
 
@@ -34,9 +33,9 @@ public class Main {
                 analyzer.analyzeLog(logFile);
                 analyzer.writeSummary(outputFile);
                 DiscordWebhookSender.sendFileToDiscord(webhookUrl, outputFile);
-                System.out.println(" " + logFile.getName() + " → 送信完了");
+                System.out.println("✅ " + logFile.getName() + " → 送信完了");
             } catch (IOException e) {
-                System.err.println(" エラー発生: " + logFile.getName());
+                System.err.println("❌ エラー発生: " + logFile.getName());
                 e.printStackTrace();
             }
         }
