@@ -19,14 +19,12 @@ public class JenkinsLogAnalyzer {
             String line;
             while ((line = br.readLine()) != null) {
                 // ビルド成功判定
-                if (line.contains("Tundra build success") || line.contains("ExitCode: 0")) {
+                if (line.contains("Tundra build success") || line.contains("ExitCode: 0") || line.contains("BUILD SUCCESSFUL")) {
                     buildSucceeded = true;
                 }
 
                 // エラー検出
-                if (line.toLowerCase().contains("error")
-                        || line.toLowerCase().contains("exception")
-                        || line.toLowerCase().contains("failed")) {
+                if (line.toLowerCase().contains("error") || line.toLowerCase().contains("exception") || line.toLowerCase().contains("failed") || line.toLowerCase().contains("failure")) {
                     errorLines.add(line);
                 }
             }
@@ -35,7 +33,7 @@ public class JenkinsLogAnalyzer {
 
     public void writeSummary(File outputFile) throws IOException {
         try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile))) {
-            pw.println(" Jenkins Unity Build Log Summary\n");
+            pw.println(" java_work Build Log Summary\n");
 
             pw.println(buildSucceeded ? " ビルド結果: 成功\n" : " ビルド結果: 失敗\n");
 
