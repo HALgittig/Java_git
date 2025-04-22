@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=parent of 6d41d3e (Delete .metadata directory)
-=======
->>>>>>> parent of 6d41d3e (Delete .metadata directory)
 CustomFiltersActionGroup.org.eclipse.jdt.ui.PackageExplorer.TAG_DUMMY_TO_TEST_EXISTENCE=storedViewPreferences
 CustomFiltersActionGroup.org.eclipse.jdt.ui.PackageExplorer.userDefinedPatterns=Servers, RemoteSystemsTempFiles, *.iml
 CustomFiltersActionGroup.org.eclipse.jdt.ui.PackageExplorer.userDefinedPatternsEnabled=true

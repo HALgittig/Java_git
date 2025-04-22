@@ -2,7 +2,4 @@ INDEX VERSION 1.131+C:\Java_git\.metadata\.plugins\org.eclipse.jdt.core
 559670790.index
 1865797976.index
 4260693191.index
-<<<<<<< HEAD
-=======
 2284911842.index
->>>>>>> parent of 6d41d3e (Delete .metadata directory)
