@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 GitRepositoriesView.GitDirectories=C\:\\Java_git\\aaaaa\\java_work\\.git;C\:\\Java_git\\.git;
 GitRepositoriesView.GitDirectories.relative=aaaaa\\java_work\\.git;.git;
+=======
+GitRepositoriesView.GitDirectories=C\:\\work\\aaaaa\\java_work\\.git;
+GitRepositoriesView.GitDirectories.relative=aaaaa\\java_work\\.git;
+>>>>>>> parent of 6d41d3e (Delete .metadata directory)
 eclipse.preferences.version=1

@@ -20,7 +20,10 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+<<<<<<< HEAD
 			<item value="C:\Java_git"/>
+=======
+>>>>>>> parent of 6d41d3e (Delete .metadata directory)
 			<item value="C:\work\aaaaa\java_work"/>
 		</list>
 	</section>
