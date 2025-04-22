@@ -1,0 +1,35 @@
+package LogAnalysis_Jenkins;
+
+import java.io.File;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println("❗ ログファイルのパスを引数で指定してください。");
+            System.out.println("例: java -cp src Main C:\\logs\\jenkins_log.txt");
+            return;
+        }
+
+        File logFile = new File(args[0]);
+        File outputFile = new File("summary.txt");
+
+        // あなたのDiscord Webhook URLをここに
+        String webhookUrl = "https://discord.com/api/webhooks/xxxxxxxxxx";
+
+        if (!logFile.exists()) {
+            System.err.println("❌ ログファイルが見つかりません: " + logFile.getAbsolutePath());
+            return;
+        }
+
+        JenkinsLogAnalyzer analyzer = new JenkinsLogAnalyzer();
+        try {
+            analyzer.analyzeLog(logFile);
+            analyzer.writeSummary(outputFile);
+            DiscordWebhookSender.sendFileToDiscord(webhookUrl, outputFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("❌ エラーが発生しました: " + e.getMessage());
+        }
+    }
+}

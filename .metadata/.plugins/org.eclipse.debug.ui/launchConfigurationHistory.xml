@@ -13,7 +13,13 @@
         <favorites/>
     </launchGroup>
     <launchGroup id="org.eclipse.ui.externaltools.launchGroup">
+<<<<<<< HEAD
         <mruHistory/>
+=======
+        <mruHistory>
+            <launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;launchConfiguration local=&quot;true&quot; path=&quot;LogAnalysis_Jenkins build.xml&quot;/&gt;&#13;&#10;"/>
+        </mruHistory>
+>>>>>>> parent of 6d41d3e (Delete .metadata directory)
         <favorites/>
     </launchGroup>
     <launchGroup id="org.eclipse.debug.ui.launchGroup.run">
