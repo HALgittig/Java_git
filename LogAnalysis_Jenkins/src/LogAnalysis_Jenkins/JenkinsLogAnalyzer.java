@@ -18,12 +18,9 @@ public class JenkinsLogAnalyzer {
         try (BufferedReader br = new BufferedReader(new FileReader(logFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                // ビルド成功判定
                 if (line.contains("Tundra build success") || line.contains("ExitCode: 0") || line.contains("BUILD SUCCESSFUL")) {
                     buildSucceeded = true;
                 }
-
-                // エラー検出
                 if (line.toLowerCase().contains("error") || line.toLowerCase().contains("exception") || line.toLowerCase().contains("failed") || line.toLowerCase().contains("failure")) {
                     errorLines.add(line);
                 }
@@ -35,14 +32,14 @@ public class JenkinsLogAnalyzer {
         try (PrintWriter pw = new PrintWriter(new FileWriter(outputFile))) {
             pw.println(" java_work Build Log Summary\n");
 
-            pw.println(buildSucceeded ? " ビルド結果: 成功\n" : " ビルド結果: 失敗\n");
+            pw.println(buildSucceeded ? " Result: Success\n" : " Result: Failure\n");
 
             if (errorLines.isEmpty()) {
-                pw.println(" エラーなし");
+                pw.println("No errors");
             } else {
-                pw.println(" エラー情報（" + errorLines.size() + "件）");
+                pw.println(" Errors Information : case"+ errorLines.size());
                 for (String err : errorLines) {
-                    pw.println("- " + err);
+                    pw.println(" - " + err);
                 }
             }
         }

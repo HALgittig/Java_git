@@ -24,7 +24,6 @@ public class DiscordWebhookSender {
             OutputStream output = connection.getOutputStream();
             PrintWriter writer = new PrintWriter(new OutputStreamWriter(output, "UTF-8"), true)
         ) {
-            // ファイル部分
             writer.append("--").append(boundary).append(LINE_FEED);
             writer.append("Content-Disposition: form-data; name=\"file\"; filename=\"")
                     .append(file.getName()).append("\"").append(LINE_FEED);
@@ -39,6 +38,6 @@ public class DiscordWebhookSender {
         }
 
         int responseCode = connection.getResponseCode();
-        System.out.println("Discord Webhook 送信完了。レスポンスコード: " + responseCode);
+        System.out.println("ResponseCode: " + responseCode);
     }
 }

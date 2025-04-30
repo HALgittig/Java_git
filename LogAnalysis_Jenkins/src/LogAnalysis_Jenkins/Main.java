@@ -10,83 +10,75 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
     	
-    	if (args.length < 1) {
-            System.out.println("❗ ログフォルダのパスを引数で指定してください。");
-            System.out.println("例: java -cp src Main C:\\logs");
-            return;
-        }
-        // Jenkinsのbuildsフォルダ
-        File buildsRoot = new File(args[0]);
-        //("C:\\ProgramData\\Jenkins\\.jenkins\\jobs\\java_work\\builds");
+        File buildsRoot = new File(("C:\\ProgramData\\Jenkins\\.jenkins\\jobs\\java_work\\builds"));
 
         File latestBuild = getLatestBuildFolder(buildsRoot);
         if (latestBuild == null) {
-            System.err.println("最新のビルドフォルダが見つかりません。");
+            System.err.println(" Folder not found");
             return;
         }
 
-        System.out.println("最新のビルドフォルダ: " + latestBuild.getAbsolutePath());
+        System.out.println("Folder: " + latestBuild.getAbsolutePath());
 
-        // 拡張子なしファイルも含めて処理対象にする
         File[] logFiles = latestBuild.listFiles(file -> {
             String name = file.getName();
             return file.isFile() && (name.endsWith(".txt") || name.endsWith(".log") || !name.contains("."));
         });
 
         if (logFiles == null || logFiles.length == 0) {
-            System.out.println("ログファイルが見つかりません。");
+            System.out.println(" File not found");
             return;
+        }
+        boolean summaryExists = Arrays.stream(logFiles).anyMatch(log -> new File(latestBuild, "summary_" + log.getName() + ".txt").exists());
+        if (summaryExists) {
+        	System.out.println("Summary already exists");
+        	return;
         }
 
         String webhookUrl = "https://discord.com/api/webhooks/1361910822225449070/gqw9y635H_jCcX4RhVyjj8iwMlRnIirqrr8TnHiR5K_Q2rIeJYePzjNv3QuF9EUPYUhl";
 
         for (File logFile : logFiles) {
-            System.out.println("解析中: " + logFile.getName());
+            System.out.println(" Analyzing: " + logFile.getName());
 
-            // 拡張子がない場合は一時ファイルにコピー
+            File outputFile = new File(latestBuild, "summary_" + logFile.getName() + ".txt");
+
             File actualLogFile = logFile;
             boolean isTemp = false;
             if (!logFile.getName().contains(".")) {
+            	System.out.println(logFile.getName());
                 actualLogFile = new File(logFile.getAbsolutePath() + ".tmp.txt");
                 try {
                     Files.copy(logFile.toPath(), actualLogFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     isTemp = true;
                 } catch (IOException e) {
-                    System.err.println("拡張子なしファイルのコピーに失敗: " + e.getMessage());
+                    System.err.println(" File copy failure : " + e.getMessage());
                     continue;
                 }
             }
-
-            File outputFile = new File(latestBuild, "summary_" + logFile.getName() + ".txt");
 
             JenkinsLogAnalyzer analyzer = new JenkinsLogAnalyzer();
             try {
                 analyzer.analyzeLog(actualLogFile);
                 analyzer.writeSummary(outputFile);
                 DiscordWebhookSender.sendFileToDiscord(webhookUrl, outputFile);
-                System.out.println("送信完了: " + outputFile.getName());
+                System.out.println(" Send" + outputFile.getName());
             } catch (IOException e) {
-                System.err.println("エラー: " + e.getMessage());
+                System.err.println(" error : " + e.getMessage());
             }
 
-            // 一時ファイルを削除
-            if (isTemp) {
-                actualLogFile.delete();
-            }
+            if (isTemp) { actualLogFile.delete(); }
         }
-
-        // フォルダを開く
+        
         try {
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(latestBuild);
-                System.out.println("フォルダを開きました: " + latestBuild.getAbsolutePath());
+                System.out.println(" Opened the folder : " + latestBuild.getAbsolutePath());
             }
         } catch (IOException e) {
-            System.err.println("フォルダを開けませんでした: " + e.getMessage());
+            System.err.println(" Could not open the folder: " + e.getMessage());
         }
     }
 
-    // 最新のビルドフォルダを返す
     public static File getLatestBuildFolder(File buildsDir) {
         File[] subdirs = buildsDir.listFiles(File::isDirectory);
         if (subdirs == null || subdirs.length == 0) return null;
